@@ -22,7 +22,7 @@ Only the following files are required after construction.
 ## Contract information file
 Specify the address and ABI of the contract you want to connect to in the following file.
 
-^^^
+~~~
 contract-info.js
 ~~~
 
