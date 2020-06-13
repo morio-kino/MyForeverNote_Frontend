@@ -1,0 +1,17 @@
+{
+  "name": "forevernote",
+  "version": "1.0.0",
+  "description": "",
+  "main": "forever.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MORIO KINOSHITA",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "16.5.0",
+    "elasticlunr": "0.9.5",
+    "web3": "1.2.2",
+    "glottologist": "2.0.3"
+  }
+}
