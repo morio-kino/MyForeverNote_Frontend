@@ -8,6 +8,15 @@ The build will be executed by executing the following command.
 $ ./build.sh
 ~~~
 
+## Contract information file
+Specify the address and ABI of the contract you want to connect to in the following file.
+
+~~~
+contract-info.js
+~~~
+
+The above file is created when you build the ForeverNote_Truffle project.
+
 ## Required files
 Only the following files are required after construction.
 
@@ -18,15 +27,6 @@ Only the following files are required after construction.
 - index.html
 - index-search.js
 - web3.js
-
-## Contract information file
-Specify the address and ABI of the contract you want to connect to in the following file.
-
-~~~
-contract-info.js
-~~~
-
-The above file is created when you build the ForeverNote_Truffle project.
 
 ## Local test
 If you want to test locally, you can start the web server with the following shell file.
