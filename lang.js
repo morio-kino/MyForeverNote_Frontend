@@ -1,11 +1,11 @@
-// 表示言語
-var language = "en";
+// Language for display("en" or "ja" or "zh")
+var language = "ja";
 
-// Glottologistオブジェクト作成
+// Create a Glottologist object.
 const glot = new Glottologist();
 
 /**
-**言語切り替え用のイベント処理
+** Event processing for language switching.
 **/
 const ja = document.getElementById('ja');
 const en = document.getElementById('en');
@@ -26,22 +26,22 @@ zh.addEventListener('click', e => {
     changeLanguage("zh");
 })
 
-// 多言語のテキストをGlottologistに読み込む。
+// Multilingual text is loaded into Glottologist.
 glot.import("/lang.json").then(() => {
-    // 最初の表示
+    // First display
     glot.render();
     
-    // デフォルトの表示言語を切り替える
+    // Switch to the default display language.
     changeLanguage(language);
 });
 
-// 多言語のテキストをdictionaryに読み込む
+// Load a multilingual text into a "dictionary".
 var dictionary = null;
 $.getJSON("/lang.json", (data) => {
     dictionary = data;
 });
 
-// 指定されたキーに対応する現在の言語のテキストを取得する
+// Get the text in the current language for a given key.
 function getTextFromDict(key) {
     try {
         if (dictionary == null) {
@@ -53,7 +53,7 @@ function getTextFromDict(key) {
     }
 }
 
-// 多言語に対応するinputのid
+// The id of the input control that supports multiple languages.
 var target_inputs = [
     "search1",
     "search2",
@@ -65,7 +65,7 @@ var target_inputs = [
     "updateLocalDB",
 ];
 
-// 言語切替時の処理
+// Function to be executed at the time of language switching.
 function changeLanguage(lang) {
     language = lang;
     glot.render(language);

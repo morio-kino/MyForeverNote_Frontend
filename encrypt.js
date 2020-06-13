@@ -1,23 +1,23 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 function encrypt(data, passphrase) {
-  //パスワードはUTF-8エンコーディング
+  //Password is encoded in UTF-8.
   var secretPassphrase = CryptoJS.enc.Utf8.parse(passphrase);
   var salt = CryptoJS.lib.WordArray.random(128 / 8);
   var key128Bits500Iterations =
       CryptoJS.PBKDF2(secretPassphrase, salt, {keySize: 128 / 8, iterations: 500 });
-  //初期化ベクトル（ブロック長と同じ）
+  //Initialization vector (same as the block length)
   var iv = CryptoJS.lib.WordArray.random(128 / 8);
-  //暗号化オプション（IV:初期化ベクトル, CBCモード, パディングモード：PKCS7
+  //Encryption options (IV: initialization vector, CBC mode, padding mode: PKCS7)
   var options = {iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7};
-  //暗号化内容のエンコーディングは「UTF-8」
+  //The content is encoded as "UTF-8".
   var messageText = CryptoJS.enc.Utf8.parse(data);
 
   //----------------------------------------------------------------------
-  //暗号化
+  //encryption
   var encrypted = CryptoJS.AES.encrypt(messageText, key128Bits500Iterations, options);
   //----------------------------------------------------------------------
 
-  //暗号結果データをカンマ（","）で結合してまとめる（復号時にわかるように）
+  // Combine the encryption result data with commas (",") to make it clearer when decrypting.
   //（salt + iv + ciphertext)
   var binaryData = CryptoJS.enc.Hex.stringify(salt);
   binaryData += (',' + CryptoJS.enc.Hex.stringify(iv));
@@ -27,24 +27,24 @@ function encrypt(data, passphrase) {
 }
 
 function decrypt(encryptedData, passphrase) {
-  // あからじめ仕込んでおいた暗号化データのカンマ","を使って文字列をそれぞれに分割
+  // Split the string into its component parts using commas in the encrypted data you've prepared for it.
   var rawData = encryptedData.split(',');
 
-  var salt = CryptoJS.enc.Hex.parse(rawData[0]);  // パスワードSalt
-  var iv = CryptoJS.enc.Hex.parse(rawData[1]);    // 初期化ベクトル（IV）
-  var encryptedData = CryptoJS.enc.Base64.parse(rawData[2]); //暗号化データ本体
+  var salt = CryptoJS.enc.Hex.parse(rawData[0]);  // Password Salt
+  var iv = CryptoJS.enc.Hex.parse(rawData[1]);    // Initialization vector (IV)
+  var encryptedData = CryptoJS.enc.Base64.parse(rawData[2]); // Body of encrypted data.
 
-  //パスワード（鍵空間の定義）
+  // Password (key space definition)
   var secretPassphrase = CryptoJS.enc.Utf8.parse(passphrase);
   var key128Bits500Iterations =
       CryptoJS.PBKDF2(secretPassphrase, salt, {keySize: 128 / 8, iterations: 500 });
 
-  //復号オプション（暗号化と同様）
+  // Decryption options (similar to encryption)
   var options = {iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7};
 
-  //復号
+  // Decryption
   var decrypted = CryptoJS.AES.decrypt({"ciphertext":encryptedData}, key128Bits500Iterations, options);
-  // 文字コードをUTF-8にする
+  // Convert character code to UTF-8.
   var data = decrypted.toString(CryptoJS.enc.Utf8);
 
   return data;

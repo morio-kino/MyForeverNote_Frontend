@@ -15,7 +15,7 @@
         <!-- Glottologist -->
         <script src="./glottologist.js"></script>
     
-        <!-- 次のエラーの回避のため -->
+        <!-- Necessary to avoid the following errors. -->
         <!-- https://github.com/ethereum/web3.js/issues/3155 -->
         <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
     
@@ -27,13 +27,13 @@
         <!-- Markdown -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>  
     
-        <!-- 全文検索用のモジュールの準備 -->
+        <!-- Preparing a module for full-text search. -->
         <script>
            var createCategory;
         </script>
         <script src="index-search.js"></script>
 
-        <!-- コントラクト情報 -->
+        <!-- Contract Information -->
         <script src="contract-info.js"></script>
         <!-- ForeerNote -->
         <script src="forever.js"></script>
@@ -65,7 +65,7 @@
                 background: #aaffaa;
             }
       
-            /*ラベル*/
+            /* label */
             .forevernote label.with_checkbox {
                 font-weight: bold;
                 color: #0000aa;
@@ -74,7 +74,7 @@
                 transition: all 0.5s;
             }
             
-            /*アイコンを表示*/
+            /* Show icons. */
             .forevernote label.with_checkbox:before {
                 display: inline-block;
             //    content: '\f078';  /* 下向き */
@@ -85,13 +85,13 @@
                 transition: 0.2s;
             }
             
-            /*ラベルホバー時*/
+            /* Set for when the mouse is over the label. */
             .forevernote label.with_checkbox:hover {
                 //background : silver;
                 background : #ccccff;
             }
             
-            /*アイコンを切り替え*/
+            /* Switch icons. */
             .forevernote input:checked + label.with_checkbox:before {
             //     content: '\f00d';  /* × */
             //     content: '\f078';    /* 下向き */
@@ -101,12 +101,12 @@
                  transform: rotate(90deg);
             }
             
-            /*チェックは隠す*/
+            /* Hide the check button. */
             .forevernote input.cssacc {
                 display: none;
             }
             
-            /*中身を非表示にしておく*/
+            /* Hide the content. */
             .forevernote .accshow {
                 height: 0;
                 padding: 0;
@@ -115,7 +115,7 @@
                 transition: 0.8s;
             }
             
-            /*クリックで中身表示*/
+            /* Show on click. */
             .cssacc:checked + label + .accshow {
                 height: auto;
                 opacity: 1;
@@ -151,7 +151,7 @@
     </head>
   
     <body>
-        <!-- 言語の選択 -->
+        <!-- Select a language. -->
         <header class="masthead mb-auto">
             <div class="inner">
                 <nav class="nav nav-masthead justify-content-center">
@@ -166,196 +166,190 @@
         <p/>
         <div class="forevernote">
     
-            <!-- 現在の情報 -->
+            <!-- Current Information. -->
             <input type="checkbox" id="currentInfo" class="cssacc" checked/>
-            <label class="with_checkbox" for="currentInfo" glot-model="current info">現在の情報</label>
+            <label class="with_checkbox" for="currentInfo" glot-model="current info">Current Information</label>
             <div style="padding:10px; margin-bottom:10px; border:1px solid" class="accshow">
-                <div id="accountAddr"><label glot-model="account addr">アカウントアドレス</label> : <label id="accountLabel"></label></div>
-                <div><label glot-model="holding eth">保持しているETH</label> : <label id="baranceEth"></label></div>
-<!--
-                <div id="baranceLoss" glot-model="" hidden>消費したETH : 0 eth</div>
--->
+                <div id="accountAddr"><label glot-model="account addr">Account Address</label> : <label id="accountLabel"></label></div>
+                <div><label glot-model="holding eth">Holding ETH</label> : <label id="baranceEth"></label></div>
                 <div>
-                    <label glot-model="gas price setting">ガスプライスの設定</label> : <input type="number" name="useGasPrice" id="useGasPrice" min="0" max="100000000000" required value="10" /> gwei
-                    （<label glot-model="referance">参考</label> : <a href="https://ethgasstation.info/" target="_blank">ETH Gas Station</a>）
+                    <label glot-model="gas price setting">Gas Price Setting</label> : <input type="number" name="useGasPrice" id="useGasPrice" min="0" max="100000000000" required value="10" /> gwei
+                    （<label glot-model="referance">Reference Material</label> : <a href="https://ethgasstation.info/" target="_blank">ETH Gas Station</a>）
                 </div>
-                <div><!-- 使用するDB : -->
+                <div><!-- DB to be used : -->
                     <div>
-                        <input type="radio" name="DBType" value="localDB" onclick="localDBSelected()" checked><label glot-model="local DB">ローカルDB</label></input>
+                        <input type="radio" name="DBType" value="localDB" onclick="localDBSelected()" checked><label glot-model="local DB">Local DB</label></input>
                         <input type="file" name="localDBFile" id="localDBFile" size="50" onchange="localDBFileChange()"/>
                     </div>
-                    <input type="radio" name="DBType" value="remoteDB" onclick="remoteDBSelected()"><label glot-model="remote DB">リモートDB</label></input>
+                    <input type="radio" name="DBType" value="remoteDB" onclick="remoteDBSelected()"><label glot-model="remote DB">Remote DB</label></input>
                 </div>
             </div>
         
-            <!-- ノートの検索 -->
+            <!-- Search notes -->
             <input type="checkbox" id="searchNote" class="cssacc" checked/>
-            <label class="with_checkbox" for="searchNote" glot-model="find your notes">ノートの検索</label>
+            <label class="with_checkbox" for="searchNote" glot-model="find your notes">Find Your Notes</label>
             <div id="search" style="padding:10px; margin-bottom:10px; border:1px solid" class="accshow">
-                <p><label glot-model="categories">分類</label> : 
+                <p><label glot-model="categories">Categories</label> : 
                     <select name="searchCategory1" id="searchCategory1" onchange="searchCategory1Change();">
                         <option value="0"><label glot-model="(all)">(All)</label></option>
                     </select>
                     <select name="searchCategory2" id="searchCategory2">
                         <option value="0"><label glot-model="(all)">(All)</label></option>
                     </select>
-                    <input type="button" value="検索" onclick="searchNote();" id="search1"/>
+                    <input type="button" value="Search" onclick="searchNote();" id="search1"/>
                 </p>
                 <p>
                     <ul id="noteList">
                     </ul>
                 </p>
-                <p><label glot-model="refine">絞り込み全文検索</label> : <input type="text" name="elasticText" id="elasticText" size="50"/>
-                    <input type="button" value="検索" onclick="searchNoteElastic();" id="search2"/>
+                <p><label glot-model="refine">Refine Full-Text Search</label> : <input type="text" name="elasticText" id="elasticText" size="50"/>
+                    <input type="button" value="Search" onclick="searchNoteElastic();" id="search2"/>
                 </p>
                 <p>
                     <ul id="elasticNoteList">
                     </ul>
                 </p>
                 <p>
-                    <label glot-model="contents of the note">ノートの内容</label> : 
+                    <label glot-model="contents of the note">Contents Of The Note</label> : 
                     <div name="noteInfo" id="noteInfo" style="padding:10px; margin-bottom:10px; border:1px solid"></div>
                     <div name="noteView" id="noteView" style="padding:10px; margin-bottom:10px; border:1px solid"></div>
                 </p>
           
-                <!-- ノートの更新/削除 -->
+                <!-- Update Or Delete A Note -->
                 <input type="checkbox" id="updateNote" class="cssacc" />
-                <label class="with_checkbox" for="updateNote" glot-model="update or delete note">ノートの更新/削除</label>
+                <label class="with_checkbox" for="updateNote" glot-model="update or delete note">Update Or Delete A Note</label>
                 <div style="padding:10px; margin-bottom:10px; border:1px solid" class="accshow">
                     <div id="updateNoteEnable">
                         <p>
                             <input type="hidden" name="ctimeUpdate" id="ctimeUpdate" />
-                            <label glot-model="categories">分類</label> : 
+                            <label glot-model="categories">Categories</label> : 
                             <select name="category1Update" id="category1Update" onchange="category1UpdateChange();"></select>
                             <select name="category2Update" id="category2Update"></select>
                         </p>
                         <p>
-                            <label glot-model="title">タイトル</label> : 
+                            <label glot-model="title">Title</label> : 
                             <input type="text" name="titleUpdate" id="titleUpdate" size="80"></textarea>
                         </p>
                         <p>
-                            <label glot-model="note format">ノートの形式</label> :
+                            <label glot-model="note format">Note Format</label> :
                             <input id="typeMarkdownUpdate" type="radio" name="typeUpdate" value="markdown" onclick="typeUpdateClick()" checked >MarkDown</input>
                             <input id="typeHTMLUpdate" type="radio" name="typeUpdate" value="html" onclick="typeUpdateClick()">HTML</input>
-                            <input id="typeTextUpdate" type="radio" name="typeUpdate" value="text" onclick="typeUpdateClick()"><label glot-model="text">テキスト</label></input>
+                            <input id="typeTextUpdate" type="radio" name="typeUpdate" value="text" onclick="typeUpdateClick()"><label glot-model="text">Text</label></input>
                         </p>
                         <p>
-                            <label glot-model="note">ノート</label> : <br/>
+                            <label glot-model="note">Note</label> : <br/>
                             <textarea name="noteUpdate" id="noteUpdate" rows="10" cols="100"></textarea>
                         </p>
                         <p>
-                            <label glot-model="preview">プレビュー</label> : <br/>
+                            <label glot-model="preview">Preview</label> : <br/>
                             <div name="previewUpdate" id="previewUpdate" style="padding:10px; margin-bottom:10px; border:1px solid"></div>
                         </p>
                         <p>
-                            <input type="button" value="ノートを更新" onclick="updateNote();" id="update_this_note"/>
-                            <input type="button" value="ノートを削除" onclick="deleteNote();" id="delete_this_note"/>
+                            <input type="button" value="Update This Note" onclick="updateNote();" id="update_this_note"/>
+                            <input type="button" value="Delete This Note" onclick="deleteNote();" id="delete_this_note"/>
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- 編集 -->
+            <!-- Edit -->
             <input type="checkbox" id="editOperations" class="cssacc" />
-            <label class="with_checkbox" for="editOperations" glot-model="edit">編集</label>
+            <label class="with_checkbox" for="editOperations" glot-model="edit">Edit</label>
             <div style="padding:10px; margin-bottom:10px; border:1px solid" class="accshow">
          
-                <!-- 分類の追加または更新 -->
+                <!-- Add Or Update A Categories -->
                 <input type="checkbox" id="addCategories" class="cssacc" />
-                <label class="with_checkbox" for="addCategories" glot-model="add or update categories">分類の追加または更新 (既存のIDを指定すると更新になります)</label>
+                <label class="with_checkbox" for="addCategories" glot-model="add or update categories">Add Or Update A Categories (update with an existing ID)</label>
                 <div style="padding:10px; margin-bottom:10px; border:1px solid" class="accshow">
                     <div id="addCategoriesEnable">
-                        <!--
-                        [分類の追加または更新] (既存のIDを指定すると更新になります)
-                        -->
-                        <p><label glot-model="type of categories">分類の種類</label> :
+                        <p><label glot-model="type of categories">Type Of Categories</label> :
                             <select name="categoryType" id="categoryType" onchange="categoryTypeChange();">
-                                <option value="1"><label glot-model="main category">大分類用</label></option>
-                                <option value="2"><label glot-model="subcategory">小分類用</label></option>
+                                <option value="1"><label glot-model="main category">Main Category</label></option>
+                                <option value="2"><label glot-model="subcategory">Subcategory</label></option>
                             </select>
                         </p>
-                        <p id="parentCategoryText" hidden><label glot-model="category parents">親の大分類</label> : <select name="parentCategory" id="parentCategory" disabled="disabled" onchange="checkCategoryOpeType()"></select></p>
-                        <p><label glot-model="categories ID">分類のID</label> : <input type="number" name="categoryID" id="categoryID" min="1" max="256" onchange="checkCategoryOpeType()" required /></p>
+                        <p id="parentCategoryText" hidden><label glot-model="category parents">Category Parents</label> : <select name="parentCategory" id="parentCategory" disabled="disabled" onchange="checkCategoryOpeType()"></select></p>
+                        <p><label glot-model="categories ID">Categories ID</label> : <input type="number" name="categoryID" id="categoryID" min="1" max="256" onchange="checkCategoryOpeType()" required /></p>
                         <div id="oldCategoryInfo">
-                            <p><label glot-model="text before the change">変更前テキスト</label> : <input type="text" name="oldCategoryText" id="oldCategoryText" size="50" readonly="readonly"/></p>
+                            <p><label glot-model="text before the change">Text Before The Change</label> : <input type="text" name="oldCategoryText" id="oldCategoryText" size="50" readonly="readonly"/></p>
                         </div>
                         <div>
-                            <p><label glot-model="categories text">分類のテキスト</label> : <input type="text" name="categoryText" id="categoryText" size="50"/></p>
+                            <p><label glot-model="categories text">Categories Text</label> : <input type="text" name="categoryText" id="categoryText" size="50"/></p>
                         </div>
-                        <p><input name="addCategoryButton" id="addCategoryButton" type="button" value="追加" onclick="addCategory();" id="add_categories"/></p>
+                        <p><input name="addCategoryButton" id="addCategoryButton" type="button" value="Add" onclick="addCategory();" id="add_categories"/></p>
                     </div>
                 </div>
             
-                <!-- ノートの追加 -->
+                <!-- Add a note -->
                 <input type="checkbox" id="addNote" class="cssacc" />
-                <label class="with_checkbox" for="addNote" glot-model="add note">ノートの追加</label>
+                <label class="with_checkbox" for="addNote" glot-model="add note">Add A Note</label>
                 <div style="padding:10px; margin-bottom:10px; border:1px solid" class="accshow">
                     <div id="addNoteEnable">
                         <p>
-                            <label glot-model="categories">分類</label> : 
+                            <label glot-model="categories">Categories</label> : 
                             <select name="category1" id="category1" onchange="category1Change();"></select>
                             <select name="category2" id="category2"></select>
                         </p>
                         <p>
-                            <label glot-model="title">タイトル</label> : 
+                            <label glot-model="title">Title</label> : 
                             <input type="text" name="title" id="title" size="80"></textarea>
                         </p>
                         <p>
-                            <label glot-model="note format">ノートの形式</label> :
+                            <label glot-model="note format">Note Format</label> :
                             <input id="typeMarkdown" type="radio" name="type" value="markdown" onclick="typeClick()" checked >MarkDown</input>
                             <input id="typeHTML" type="radio" name="type" value="html" onclick="typeClick()">HTML</input>
                             <input id="typeText" type="radio" name="type" value="text" onclick="typeClick()"><label glot-model="plain text">テキスト</label></input>
                         </p>
                         <p>
-                            <label glot-model="note">ノート</label> : <br/>
+                            <label glot-model="note">Note</label> : <br/>
                              <textarea name="note" id="note" rows="10" cols="100"></textarea>
                         </p>
                         <p>
-                            <label glot-model="preview">プレビュー</label> : <br/>
+                            <label glot-model="preview">Preview</label> : <br/>
                             <div name="preview" id="preview" style="padding:10px; margin-bottom:10px; border:1px solid"></div>
                         </p>
-                        <p><input type="button" value="ノートを追加" onclick="addNote();" id="addNoteButton"/></p>
+                        <p><input type="button" value="Add" onclick="addNote();" id="addNoteButton"/></p>
                     </div>
                 </div>
           
-                <!-- エスクポート/インポート -->
+                <!-- Export/Import -->
                 <input type="checkbox" id="ex_im" class="cssacc" />
-                <label class="with_checkbox" for="ex_im" glot-model="export_import">エクスポート/インポート</label>
+                <label class="with_checkbox" for="ex_im" glot-model="export_import">Export/Import</label>
                 <div style="padding:10px; margin-bottom:10px; border:1px solid" class="accshow">
-                    <p><label glot-model="operation type">操作の種類</label> :
-                        <input type="radio" name="eximType" value="export" onclick="exportSelected()" checked/><label glot-model="export">エクスポート</label>
-                        <input type="radio" name="eximType" value="import" onclick="importSelected()"/>        <label glot-model="import">インポート</label>
+                    <p><label glot-model="operation type">Type Of Operation</label> :
+                        <input type="radio" name="eximType" value="export" onclick="exportSelected()" checked/><label glot-model="export">Export</label>
+                        <input type="radio" name="eximType" value="import" onclick="importSelected()"/>        <label glot-model="import">Import</label>
                     </p>
                     <div id="exportData">
-                        <div id="exportFromLocal"><label glot-model="export source">エクスポート元</label> : <label glot-model="local memory">ローカルメモリ</label></div>
-                        <div id="exportFromRemote"><label glot-model="export source account">エクスポート元アカウントアドレス</label> : <label id="accountLabelEx">aaa</label></div>
+                        <div id="exportFromLocal"><label glot-model="export source">Export Source</label> : <label glot-model="local memory">Local Memory</label></div>
+                        <div id="exportFromRemote"><label glot-model="export source account">Export Source Account Address</label> : <label id="accountLabelEx">aaa</label></div>
                         <div id="arrowEx">　　　　↓</div>
-                        <div id="exportFileTitle"><label glot-model="file name">ファイル名</label> : <label glot-model="download">ダウンロード</label>/<input type="text" name="exportFile" id="exportFile" size="50"/></div>
+                        <div id="exportFileTitle"><label glot-model="file name">File Name</label> : <label glot-model="download">Download</label>/<input type="text" name="exportFile" id="exportFile" size="50"/></div>
                     </div>
                     <div id="importData" style="display:none">
-                        <div id="importFileTitle"><label glot-model="file">ファイル</label> : <input type="file" name="importFile" id="importFile" size="50"/></div>
+                        <div id="importFileTitle"><label glot-model="file">File</label> : <input type="file" name="importFile" id="importFile" size="50"/></div>
                         <div id="arrowIm">　　　　↓</div>
-                        <div id="importToLocal"><label glot-model="importing destination">インポート先</label> : <label glot-model="local memory">ローカルメモリ</label></div>
-                        <div id="importToRemote"><label glot-model="import destination account">インポート先アカウントアドレス</label> : <label id="accountLabelIm"></label></div>
+                        <div id="importToLocal"><label glot-model="importing destination">Importing Destination</label> : <label glot-model="local memory">Local Memory</label></div>
+                        <div id="importToRemote"><label glot-model="import destination account">Import destination account address</label> : <label id="accountLabelIm"></label></div>
                     </div>
-                    <p><input name="execButton" id="execButton" type="button" value="実行" onclick="execExIm();"/></p>
+                    <p><input name="execButton" id="execButton" type="button" value="Execute" onclick="execExIm();"/></p>
                 </div>
           
-                <!-- 最新の情報をローカルDB用ファイルとして保存 -->
+                <!-- Save the latest information as a file for local DB -->
                 <input type="checkbox" id="download_for_local_db" class="cssacc" />
-                <label class="with_checkbox" for="download_for_local_db" glot-model="save for local DB">最新の情報をローカルDB用ファイルとして保存</label>
+                <label class="with_checkbox" for="download_for_local_db" glot-model="save for local DB">Save the latest information as a file for local DB</label>
                 <div style="padding:10px; margin-bottom:10px; border:1px solid" class="accshow">
-                    <div id="localDBfromLocal"><label glot-model="source of the information">情報の取得元</label> : <label glot-model="local memory">ローカルメモリ</label></div>
-                    <div id="localDBfromRemote"><label glot-model="target account">対象アカウント</label> : <label id="accountLabelDB"></label></div>
-                    <div id="newLocalDBFileTitle"><label glot-model="destination file name">格納先ファイル名</label> : <label glot-model="download">ダウンロード</label>/<input type="text" name="newLocalDBFile" id="newLocalDBFile" size="50" value="ForeverNote.db"/></div>
-                    <div><input name="updateLocalDB" id="updateLocalDB" type="button" value="保存" onclick="saveToLocalDB();"/></div>
+                    <div id="localDBfromLocal"><label glot-model="source of the information">The Source Of The Information</label> : <label glot-model="local memory">Local Memory</label></div>
+                    <div id="localDBfromRemote"><label glot-model="target account">Target Account</label> : <label id="accountLabelDB"></label></div>
+                    <div id="newLocalDBFileTitle"><label glot-model="destination file name">Destination File Name</label> : <label glot-model="download">Download</label>/<input type="text" name="newLocalDBFile" id="newLocalDBFile" size="50" value="ForeverNote.db"/></div>
+                    <div><input name="updateLocalDB" id="updateLocalDB" type="button" value="Save" onclick="saveToLocalDB();"/></div>
                 </div>
         
             </div>
       
         </div>
 
-        <!-- 多言語化処理 -->
+        <!-- Multilingual processing. -->
         <script src="./lang.js"></script>
 
     </body>

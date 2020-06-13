@@ -246,7 +246,7 @@
     },
     "import destination account": {
         "ja": "インポート先アカウントアドレス",
-        "en": "import destination account address",
+        "en": "Import destination account address",
         "zh": "导入目的地账户地址"
     },
     "execButton": {
