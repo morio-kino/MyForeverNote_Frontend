@@ -1,5 +1,5 @@
-# ForeverNote_Frontend
-Frontend program for ForeverNote.
+# MyForeverNote_Frontend
+Frontend program for MyForeverNote.
 
 ## Run the build
 The build will be executed by executing the following command.
@@ -15,7 +15,7 @@ Specify the address and ABI of the contract you want to connect to in the follow
 contract-info.js
 ~~~
 
-The above file is created when you build the ForeverNote_Truffle project.
+The above file is created when you build the MyForeverNote_Truffle project.
 
 ## Required files
 Only the following files are required after construction.

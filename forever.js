@@ -411,7 +411,7 @@ window.addEventListener('load', function() {
   
     // アカウントを使用可能な場合の処理
     var passPromise = accountPromise.then(account => {
-        // ForeverNoteのコントラクトのインスタンスを作成
+        // MyForeverNoteのコントラクトのインスタンスを作成
         foreverNote = new web3.eth.Contract(ABI, addr);
     
         // バランスの表示
