@@ -1,3 +1,5 @@
+[to Wiki](../../wiki)
+
 # MyForeverNote_Frontend
 Frontend program for MyForeverNote.
 
