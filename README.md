@@ -1,5 +1,18 @@
 [to Wiki](../../wiki)
 
+# MyForeverNote
+## Overview.
+MyForeverNote uses Ethereum to.
+
++ Create, update and record personal notes.
++ You can search and view the notes you have created.
++ The notes are encrypted and cannot be viewed without an Ethereum wallet.
++ You can export/import notes you've created, so you can transfer the notes you've created to other wallets You can take over to.
++ local DB functionality
+    + Create, update, search, and save notes even when you are not connected to the network by using local DBs You can view the information created in the remote DB (on Ethereum)
+    + Local DB (local file) for information created in a remote DB (on Ethereum). You can save them as.
+    + Notes created in the local DB can be exported/imported to a remote DB ( Ethereum).
+
 # MyForeverNote_Frontend
 Frontend program for MyForeverNote.
 
