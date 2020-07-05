@@ -2,7 +2,7 @@
 
 # MyForeverNote
 ## Overview.
-MyForeverNote uses Ethereum to.
+MyForeverNote uses Ethereum to do the following.
 
 + Create, update and record personal notes.
 + You can search and view the notes you have created.
