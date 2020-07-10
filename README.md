@@ -39,8 +39,11 @@ Only the following files are required after construction.
 - encrypt.js
 - favicon.ico
 - forever.js
+- glottologist.js
 - index.html
 - index-search.js
+- lang.js
+- lang.json
 - web3.js
 
 ## Local test
