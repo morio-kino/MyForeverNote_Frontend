@@ -1,4 +1,4 @@
-[to Wiki](../../wiki)
+[[to Wiki]](../../wiki)
 
 # MyForeverNote
 ## Overview.
@@ -53,3 +53,4 @@ If you want to test locally, you can start the web server with the following she
 $ ./start-web.sh
 ~~~
 
+## [More Information](../../wiki)
