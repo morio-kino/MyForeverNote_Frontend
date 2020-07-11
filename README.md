@@ -47,10 +47,17 @@ Only the following files are required after construction.
 - web3.js
 
 ## Local test
-If you want to test locally, you can start the web server with the following shell file.
+- If you want to test locally, you can start the web server with the following shell file.
 
 ~~~
 $ ./start-web.sh
 ~~~
 
-## [More Information](../../wiki)
+- In your browser, select the Ethereum account you want to use.
+- Open the following URL in your browser.
+
+~~~
+http://localhost:8000
+~~~
+
+## [[More Information]](../../wiki)
