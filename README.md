@@ -53,7 +53,7 @@ Only the following files are required after construction.
 $ ./start-web.sh
 ~~~
 
-- In your browser, select the Ethereum account you want to use.
+- In your browser's wallet application, select the Ethereum account you want to use.
 - Open the following URL in your browser.
 
 ~~~
